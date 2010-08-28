@@ -308,15 +308,7 @@ class AmchartsHelper extends AppHelper {
 		return $xml;
 		
     }
-	/**
-	* If the array is Assoc.
-	* 
-	* @param array $data
-	* @private
-	*/   
-   	private static function isAssoc( $array ) {
-        return (is_array($array) && 0 !== count(array_diff_key($array, array_keys(array_keys($array)))));
-   	}
+	
 	/**
 	*
 	* Returns code for setting the chart.
