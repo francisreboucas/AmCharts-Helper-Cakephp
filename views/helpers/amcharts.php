@@ -259,44 +259,54 @@ class AmchartsHelper extends AppHelper {
 
 	/**
 	 * The main function for converting to an XML document.
-	 * Pass in a multi dimensional array and this recrusively loops through and builds up an XML document.
+	 * Pass the configuration with:
+	 *	 $data = array(
+	 *			'background.alpha'=>100,
+	 *			'background.border_alpha'=>20,
+	 *			'legend.enabled'=>1,
+	 *			'legend.align' => 'center',
+	 *			'pie.y'=>'50%',
+	 *			'pie.inner_radius'=>30,
+	 *			'data_labels.show'=>'{title}: {value}',
+	 *			'data_labels.max_width'=>140);	
 	 *
-	 * @author djdykes
-	 * @link http://snipplr.com/view.php?codeview&id=3491
 	 * @param array $data
 	 * @param string $rootNodeName - what you want the root node to be - defaults to data.
-	 * @param SimpleXMLElement $xml - should only be used recursively
-	 * @return string XML
-	 * @license GPLv2
+	 * @return SimpleXML Object
 	 * @public
-	 *
-	 * Adaptação do código para esta classe
-	 * @author Francis Rebouças
 	 * 
 	 */
 	
-  	public static function toXml($data, $rootNodeName = 'settings', &$xml=null)
+  	public static function toXml($data, $rootNodeName = 'settings')
     {
-        if (ini_get('zend.ze1_compatibility_mode') == 1)
-        {  ini_set ('zend.ze1_compatibility_mode', 0);   }
-        if (is_null($xml)){
-            $xml = new SimpleXMLElement("<$rootNodeName />");
-        }
-        foreach($data as $key => $value)
-       {
-            if (is_numeric($key)){
-                $key = $rootNodeName;
-            }
-           $key = preg_replace('/[^a-z0-9\-\_\.\:]/i', '', $key);
-            if (is_array($value)){
-                $node = self::isAssoc($value) ? $xml->addChild($key) : $xml;
-                self::toXml($value, $key, $node);
-            }else{
-                $value = htmlentities($value);
-                $xml->addChild($key,$value);
-            }
-        }
-        return $xml;
+      	
+		$xml = new SimpleXMLElement("<$rootNodeName />");
+		foreach($data as $key => $value){
+			
+			$keyPath = (array)explode(".", $key);
+			$count = count($keyPath);
+			$currentXml = $xml;
+			for($i = 0; $i < $count - 1; $i++) {
+				$nextNode = null;
+				foreach($currentXml->children() as $child){
+					if($child->getName() == $keyPath[$i]){
+						$nextNode = $child;
+						break;
+					}
+				}	
+				if($nextNode === null){
+						$nextNode = $currentXml->addChild($keyPath[$i]);
+				}
+				$currentXml = $nextNode;
+			}
+			if($value === true || $value === false){
+					$value = (int)$value;
+			}
+			$currentXml->addChild($keyPath[count($keyPath) - 1], $value);	
+		}
+		
+		return $xml;
+		
     }
 	/**
 	* If the array is Assoc.
