@@ -1,0 +1,12 @@
+Amcharts Helper - Cakephp
+
+Este helper tem a função de simplificar o uso do componente Amchart Flash Charts.
+
+http://www.amchart.com
+
+O componente é comercial, mas pode ser baixado gratuitamente e seu uso pode ser feito desde que seja exibido um link do desenvolvedor. É um preço razoável pela qualidade do Componente.
+
+TODO:
+* Fazer a documentação do Helper.
+* Fazer uma demonstração.
+* Melhorar a configuração, que ainda é complicada.
