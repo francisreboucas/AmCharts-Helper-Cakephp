@@ -210,7 +210,7 @@ class AmchartsHelper extends AppHelper {
 
 	}	
 	/**
-	* Returns code for generating the graph. Required SWFObject
+	* Returns code for generating the chart. Required SWFObject
 	* 
 	* @param	string				$_width
 	* @param	string				$_height
@@ -259,7 +259,7 @@ class AmchartsHelper extends AppHelper {
 
 	/**
 	 * The main function for converting to an XML document.
-	 * Pass the configuration with:
+	 * Pass the configuration:
 	 *	 $data = array(
 	 *			'background.alpha'=>100,
 	 *			'background.border_alpha'=>20,
