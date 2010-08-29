@@ -47,43 +47,43 @@ class AmchartsHelper extends AppHelper {
 	/**
 	 * Adds a new chart.
 	 *
-	 * @param	string				$_type
-	 * @param	array				$_config
-	 * @param	string				$_id
+	 * @param	string				$type
+	 * @param	array				$config
+	 * @param	string				$id
 	 * @public
 	 */	
-	public function chart($_type, array $_config = array(),$_id = null){
-		$this->$_type($_config,$_id);
+	public function chart($type, array $config = array(),$id = null){
+		$this->$type($config,$id);
 	}
 	/**
 	 * Adds a new column chart (data line/bar).
 	 *
-	 * @param	string				$_id
-	 * @param	array				$_config
+	 * @param	string				$id
+	 * @param	array				$config
 	 * @public	 
 	 */	
 
-	public function column(array $_config = array(),$_id = null){
-		$this->__setId($_id);
+	public function column(array $config = array(),$id = null){
+		$this->__setId($id);
 		$this->swf = 'amcolumn.swf';
 		$this->chartpath = $this->libpath.'amcolumn/';
-		$this->config = $_config;
+		$this->config = $config;
 		$this->chart = 'chart';
 		
 	}
 	/**
 	 * Adds a new line chart (data line).
 	 *
-	 * @param	string				$_id
-	 * @param	array				$_config
+	 * @param	string				$id
+	 * @param	array				$config
 	 * @public	
 	 */	
 	
-	public function line( array $_config = array(),$_id = null){
-		$this->__setId($_id);
+	public function line( array $config = array(),$id = null){
+		$this->__setId($id);
 		$this->swf = 'amline.swf';
 		$this->chartpath = $this->libpath.'amline/';
-		$this->config = $_config;
+		$this->config = $config;
 		$this->chart = 'chart';
 		
 	}
@@ -91,65 +91,65 @@ class AmchartsHelper extends AppHelper {
 	/**
 	* Adds a new pie chart 
 	*
-	* @param	string				$_id
-	* @param	array				$_config
+	* @param	string				$id
+	* @param	array				$config
 	* @public	
 	*/
 	 
-	public function pie(array $_config = array(),$_id = null ){
-		$this->__setId($_id);
+	public function pie(array $config = array(),$id = null ){
+		$this->__setId($id);
 		$this->swf = 'ampie.swf';
 		$this->chartpath = $this->libpath.'ampie/';
-		$this->config = $_config;
+		$this->config = $config;
 		$this->chart = 'pie';
 	}
 	/**
 	* Adds a new xy chart 
 	*
-	* @param	string				$_id
-	* @param	array				$_config
+	* @param	string				$id
+	* @param	array				$config
 	* @public
 	*/
 	 
-	public function xy(array $_config = array(), $_id = null){
-		$this->__setId($_id);
+	public function xy(array $config = array(), $id = null){
+		$this->__setId($id);
 		$this->swf = 'amxy.swf';
 		$this->chartpath = $this->libpath.'amxy/';
-		$this->config = array_merge($_config,array('chart'=>'xy'));
+		$this->config = array_merge($config,array('chart'=>'xy'));
 		$this->chart = 'chart';
 	}
 	/**
 	* Adds a new radar chart 
 	*
-	* @param	string				$_id
-	* @param	array				$_config
+	* @param	string				$id
+	* @param	array				$config
 	* @public
 	*/
 	 
-	public function radar( array $_config = array(),$_id = null){
-		$this->__setId($_id);
+	public function radar( array $config = array(),$id = null){
+		$this->__setId($id);
 		$this->swf = 'amradar.swf';
 		$this->chartpath = $this->libpath.'amradar/';
-		$this->config = $_config;
+		$this->config = $config;
 		$this->chart = 'chart';
 	}
 	/**
 	 * Adds a new graph (data line/bar/xy).
 	 *
-	 * @param	string				$_id
-	 * @param	string				$_title
-	 * @param	array				$_data
-	 * @param	array				$_config
+	 * @param	string				$id
+	 * @param	string				$title
+	 * @param	array				$data
+	 * @param	array				$config
 	 * @public
 	 */
 	
-	public function addGraph($_id, $_title ,array $_data = array(), array $_config = array()){
+	public function addGraph($id, $title ,array $data = array(), array $config = array()){
 		
-		$this->graphs[$_id] = array(
-			'id' => $_id,						
-			"title" => $_title,
-			"data" => $_data,
-			"config" => $_config
+		$this->graphs[$id] = array(
+			'id' => $id,						
+			"title" => $title,
+			"data" => $data,
+			"config" => $config
 		);	
 		
 		
@@ -158,67 +158,67 @@ class AmchartsHelper extends AppHelper {
 	/**
 	 * Adds a new serie (value on the X axis).
 	 *
-	 * @param	string				$_id
-	 * @param	string				$_title
-	 * @param	array				$_config
+	 * @param	string				$id
+	 * @param	string				$title
+	 * @param	array				$config
 	 * @public	 
 	 */
 	
-	public function addSerie($_id, $_title,array $_data = array(), array $_config = array()){
+	public function addSerie($id, $title,array $data = array(), array $config = array()){
 		
-		$this->series[$_id] = array(
-			'id' => $_id,
-			"title" => $_title,
-			"config" => $_config
+		$this->series[$id] = array(
+			'id' => $id,
+			"title" => $title,
+			"config" => $config
 		);
 		
 	}
 	/**
 	 * Adds a new slice to the pie chart.
 	 *
-	 * @param	string				$_id
-	 * @param	string				$_title
-	 * @param	mixed				$_value
-	 * @param	array				$_config
+	 * @param	string				$id
+	 * @param	string				$title
+	 * @param	mixed				$value
+	 * @param	array				$config
 	 * @public
 	 */
-	public function addSlice($_id, $_title, $_value, array $_config = array()) {
+	public function addSlice($id, $title, $value, array $config = array()) {
 
-		$this->slices[$_id] = array(
-			'id' => $_id,
-			"title" => $_title,
-			"value" => $_value,
-			"config" => $_config
+		$this->slices[$id] = array(
+			'id' => $id,
+			"title" => $title,
+			"value" => $value,
+			"config" => $config
 		);
 
 	}
 	/**
 	 * Adds a new axis to the radar chart.
 	 *
-	 * @param	string				$_id
-	 * @param	string				$_title
-	 * @param	mixed				$_value
-	 * @param	array				$_config
+	 * @param	string				$id
+	 * @param	string				$title
+	 * @param	mixed				$value
+	 * @param	array				$config
 	 * @public
 	 */
-	public function addAxis($_id, $_title) {
+	public function addAxis($id, $title) {
 
-		$this->axis[$_id] = array(
-			'id' => $_id,
-			"title" => $_title
+		$this->axis[$id] = array(
+			'id' => $id,
+			"title" => $title
 		);
 
 	}	
 	/**
-	* Returns code for generating the chart. Required SWFObject
+	* Returns code for generating the graph. Required SWFObject
 	* 
-	* @param	string				$_width
-	* @param	string				$_height
+	* @param	string				$width
+	* @param	string				$height
 	* @return string XML	
 	* @public
 	*/
 	
-	public function getCode($_width = '600',$_height = '400'){
+	public function getCode($width = '600',$height = '400'){
 		$this->swfobject = $this->Javascript->link('swfobject');
 		$code = '';
 		if(!self::$js) {
@@ -235,7 +235,7 @@ class AmchartsHelper extends AppHelper {
 		flashvars.chart_settings = escape('".$this->getXmlSettings()."');
 		flashvars.chart_data = escape('".$this->getXmlData()."');
 		var params = {};
-		swfobject.embedSWF('".$this->webroot.$this->chartpath.$this->swf."', 'chart_" . $this->id . "_flash','".$_width."','".$_height."','8','',flashvars, params, {});
+		swfobject.embedSWF('".$this->webroot.$this->chartpath.$this->swf."', 'chart_" . $this->id . "_flash','".$width."','".$height."','8','',flashvars, params, {});
 		");		
 		$code .= "</div>";
 		return $code;
@@ -244,12 +244,12 @@ class AmchartsHelper extends AppHelper {
 	/**
 	* Add Title
 	*
-	* @param	string				$_title
+	* @param	string				$title
 	* @public
 	*/
-	public function setTitle($_title) {
+	public function setTitle($title) {
 		$this->labels[0] = array(
-		'text' => $_title,
+		'text' => $title,
 		'x' => 0,
 		'y' => 18,
 		'config'=>array('align' => 'center')
@@ -259,7 +259,7 @@ class AmchartsHelper extends AppHelper {
 
 	/**
 	 * The main function for converting to an XML document.
-	 * Pass the configuration:
+	 * Pass the configuration with:
 	 *	 $data = array(
 	 *			'background.alpha'=>100,
 	 *			'background.border_alpha'=>20,
@@ -308,7 +308,7 @@ class AmchartsHelper extends AppHelper {
 		return $xml;
 		
     }
-	
+
 	/**
 	*
 	* Returns code for setting the chart.
@@ -413,13 +413,13 @@ class AmchartsHelper extends AppHelper {
 
 	/**
 	*
-	* Set the id for the chart (optional)
+	* Set the id for the chart
 	* @private
-	* @param	string				$_id
+	* @param	string				$id
 	*/  	
-	private function __setid($_id = null) {
-		if($_id)
-			$this->id = $_id;
+	private function __setid($id = null) {
+		if($id)
+			$this->id = $id;
 		else
 			$this->id = substr(md5(uniqid() . microtime()), 3, 5);
 	}
